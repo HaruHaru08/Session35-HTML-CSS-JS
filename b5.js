@@ -1,49 +1,44 @@
 let editingIndex=-1;
 
 function getData() {
-    return JSON.parse(localStorage.getItem('categories')) || [
-      { code: 'DM001', name: 'Danh mục 1', status: 'Đang hoạt động' },
-      { code: 'DM002', name: 'Danh mục 2', status: 'Ngừng hoạt động' },
-      { code: 'DM003', name: 'Danh mục 3', status: 'Đang hoạt động' },
-      { code: 'DM004', name: 'Danh mục 4', status: 'Ngừng hoạt động' },
-      { code: 'DM005', name: 'Danh mục 5', status: 'Đang hoạt động' },
-    ]
-  }
+    return JSON.parse(localStorage.getItem("categories")) || [];
+}
 
-  function saveData(data) {
-    localStorage.setItem("categories", JSON.stringify(data))
-  }
+function saveData(data) {
+    localStorage.setItem("categories", JSON.stringify(data));
+}
 
-  function renderData() {
+function renderData() {
     let data = getData();
-    let table = document.getElementById('category-table');
-    console.log(table);
-    table.innerHTML = ''
-    console.log(data);
+    let table = document.getElementById("category-table");
+    table.innerHTML = ""; // Xóa nội dung cũ trước khi render
+
     data.forEach((item, index) => {
-      table.innerHTML += `
-            <tr> 
-              <td>${item.code}</td>  
-              <td>${item.name}</td>
-              <td class="status ${item.status === "Đang hoạt động" ? "active" : "inactive"}">${item.status}</td> 
-              <td class="actions">
-                <button class="delete">Xóa</button> 
-                <button class="edit">Sửa</button> 
-              </td>
+        table.innerHTML += `
+            <tr>
+                <td>${item.code}</td>
+                <td>${item.name}</td>
+                <td class="status ${
+                  item.status === "Đang hoạt động" ? "active" : "inactive"
+                }">${item.status}</td>
+                <td class="actions">
+                    <button class="delete" onclick="deleteCategory('${item.code}')">Xóa</button>
+                    <button class="edit" onclick="editCategory(${index})">Sửa</button>
+                </td>
             </tr>
-        `
-    })
-  }
+        `;
+    });
+}
 
-  function openModal() {
+function openModal() {
     document.getElementById("modal").style.display = "flex";
-  }
+}
 
-  function closeModal() {
+function closeModal() {
     document.getElementById("modal").style.display = "none"
-  }
+}
 
-  function addCategory() {
+function addCategory() {
     let codeInput = document.getElementById("code").value;
     let nameInput = document.getElementById("name").value;
     let status = document.querySelector('input[name="status"]:checked').value;
@@ -82,20 +77,31 @@ function getData() {
     saveData(data)
     renderData()
     closeModal()
-  }
-
-  function deleteCategory(index){
-    if(confirm("Bạn có muốn xóa không ???")){
-      let data = getData();
-      data.splice(index,1);
-      saveData(data);
-      renderData()
-    }
-  }
-  function editCategory(index){
-    let data =getData()[index];
-    document.getElementById("code").value=data.code;
-    document.getElementById("name").value=data.name;
-    document.querySelector("")
 }
-  renderData()
+
+function deleteCategory(code) {
+    if(confirm("Bạn có muốn xóa không ???")){
+        let data = getData();
+        data.splice(index,1);
+        saveData(data);
+        renderData()
+      }
+}
+
+function editCategory(index) {
+    let data = getData(); // Lấy toàn bộ dữ liệu từ localStorage
+    let category = data[index]; // Lấy danh mục theo chỉ số
+
+    if (category) {
+        document.getElementById("code").value = category.code; // Gán giá trị mã danh mục
+        document.getElementById("name").value = category.name; // Gán giá trị tên danh mục
+        document.querySelector(`input[name="status"][value="${category.status}"]`).checked = true; // Gán trạng thái
+        editingIndex = index; // Lưu chỉ số danh mục đang chỉnh sửa
+        openModal(); // Mở modal để chỉnh sửa
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderData();
+});
+renderData()
