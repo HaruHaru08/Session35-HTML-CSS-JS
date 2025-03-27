@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./b5.css">
+</head>
+<body>
+    <h1>Danh mục</h1>
+
+  <div class="controls">
+    <div>
+      <select id="filter-status">
+        <option value="">Tất cả</option>
+        <option value="Đang hoạt động">Đang hoạt động</option>
+        <option value="Ngừng hoạt động">Ngừng hoạt động</option>
+      </select>
+      <input type="text" id="search-name" placeholder="Tìm kiếm danh mục theo tên">
+    </div>
+    <button class="btn btn-primary" onclick="openModal()">Thêm mới danh mục</button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Mã danh mục</th>
+        <th>Tên danh mục</th>
+        <th>Trạng thái</th>
+        <th>Chức năng</th>
+      </tr>
+    </thead>
+    <tbody id="category-table"></tbody>
+  </table>
+
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="modal-title">Thêm mới danh mục</span>
+        <span style="cursor:pointer;" onclick="closeModal()">×</span>
+      </div>
+      <div class="form-group">
+        <label>Mã danh mục</label>
+        <input type="text" id="code">
+        <div id="code-error" class="error-message">Mã danh mục không được để trống</div>
+      </div>
+      <div class="form-group">
+        <label>Tên danh mục</label>
+        <input type="text" id="name">
+        <div id="name-error" class="error-message">Tên danh mục không được để trống</div>
+      </div>
+      <div class="form-group">
+        <label>Trạng thái</label><br>
+        <input type="radio" name="status" value="Đang hoạt động" checked> Đang hoạt động
+        <input type="radio" name="status" value="Ngừng hoạt động"> Ngừng hoạt động
+      </div>
+      <button class="btn btn-cancel" onclick="closeModal()">Hủy</button>
+      <button class="btn btn-primary" onclick="addCategory()">Lưu</button>
+    </div>
+  </div>
+  <script src="./b5.js"></script>
+</body>
+</html>

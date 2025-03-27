@@ -1,7 +1,7 @@
 let add = document.getElementById("btn-add");
 let save = document.getElementById("save");
 let container = document.getElementsByClassName("container")[0];
-let bookmarkListContainer = document.querySelector(".bookmark-list-container"); // Sử dụng div từ HTML
+let bookmarkListContainer = document.querySelector(".bookmark-list-container");
 
 add.onclick = function () {
     container.style = "display:block";
