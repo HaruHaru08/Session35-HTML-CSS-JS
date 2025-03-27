@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./b4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Danh sách nhân viên Rikkei</h1>
+        <div class="form-container">
+            <div class="form-group">
+                <label for="employee-name">Tên nhân viên</label>
+                <input type="text" id="employee-name" placeholder="Tên nhân viên">
+                <label for="employee-role">Chức vụ</label>
+                <input type="text" id="employee-role" placeholder="Chức vụ">
+            </div>
+            <button id="add-employee">Thêm nhân viên</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên</th>
+                    <th>Chức vụ</th>
+                </tr>
+            </thead>
+            <tbody id="employee-list">
+
+            </tbody>
+        </table>
+        <div class="pagination">
+            <button id="prev-page">Previous</button>
+            <div id="page-numbers">
+                
+            </div>
+            <button id="next-page">Next</button>
+        </div>
+    </div>
+    <script src="./b4.js"></script>
+</body>
+</html>
